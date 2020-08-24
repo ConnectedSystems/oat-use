@@ -1,0 +1,169 @@
+((dp0
+S'farm'
+p1
+(dp2
+S'0_2020-03-17_100838_04c1d9db-41f4-587b-b66f-b4a1095ab1aa_worst_case_rcp45_2016-2045'
+p3
+(dp4
+S'Avg. IWUI'
+p5
+F0.7085736032086731
+sS'Total GW Used (ML)'
+p6
+F9642713.774606153
+sS'Avg. Annual Profit ($)'
+p7
+F40618687.05972291
+sS'Total Rainfall (mm)'
+p8
+F99021.00739229764
+sS'Total SW Used (ML)'
+p9
+F14365179.321312496
+sS'Avg. Irrigated Area (Ha)'
+p10
+F0.15417343983115955
+sS'Income Volatility'
+p11
+F0.9407534641570335
+sS'Avg. GPWUI'
+p12
+F0.5540794670016058
+sS'Avg. Dryland Area (Ha)'
+p13
+F0.8458265601688403
+sS'Avg. ML/Ha'
+p14
+F1.291678475276561
+sS'Avg. $/ML'
+p15
+F20.337252286687026
+sS'Avg. ML'
+p16
+F166437.95044653237
+sS'Avg. Annual Profit ($M)'
+p17
+F40.61868705972291
+ssS'1_2020-03-17_100838_c9ad73f6-30fb-5e80-9349-58c7951b1181_worst_case_rcp45_2016-2045'
+p18
+(dp19
+g5
+F1.092146914094492
+sg6
+F7245710.01708031
+sg7
+F46811338.701949276
+sg8
+F99021.00739229764
+sg9
+F20836761.159330834
+sg10
+F0.2718121257395359
+sg11
+F0.8802830499387505
+sg12
+F0.5456147178429407
+sg13
+F0.7281878742604643
+sg14
+F0.8569913352648255
+sg15
+F15.276467822613588
+sg16
+F255356.46964506953
+sg17
+F46.811338701949275
+sssS'SW Allocation Index'
+p20
+(dp21
+g3
+F87.33273834680247
+sg18
+F87.21233781788717
+ssS'gw_trigger_norm_dist'
+p22
+(dp23
+g3
+cnumpy.core.multiarray
+scalar
+p24
+(cnumpy
+dtype
+p25
+(S'f8'
+p26
+I0
+I1
+tp27
+Rp28
+(I3
+S'<'
+p29
+NNNI-1
+I-1
+I0
+tp30
+bS'\x89\x1b*b\xcd\xcc\xc1?'
+p31
+tp32
+Rp33
+sg18
+g24
+(g28
+S'\x15\x02~/\x7fLy\xbf'
+p34
+tp35
+Rp36
+ssS'gw_trigger_proposed_rules'
+p37
+(dp38
+g3
+g24
+(g28
+S'9\x16A\xba\xd6\xfa\xe1?'
+p39
+tp40
+Rp41
+sg18
+g24
+(g28
+S'\x90\xfa\xc1@\xc9\xcc\xe0?'
+p42
+tp43
+Rp44
+ssS'gw_trigger_current_rules'
+p45
+(dp46
+g3
+g24
+(g28
+S'\xf4\x0c\xa4\x00w\xdd\xd9?'
+p47
+tp48
+Rp49
+sg18
+g24
+(g28
+S'\xffm\x85\x08\xa4\x95\xd8?'
+p50
+tp51
+Rp52
+ssS'ecology_indices'
+p53
+(dp54
+g3
+(dp55
+S'Recreation Index'
+p56
+F0.933962242160014
+sS'Ecology Index'
+p57
+F0.24408843137166192
+ssg18
+(dp58
+g56
+F0.933962242160014
+sg57
+F0.24112751217630815
+sssNtp59
+.
