@@ -1,8 +1,8 @@
 import pandas as pd
-from SALib.sample.radial.radial_sobol import sample
+from SALib.sample.morris import sample as morris_sampler
 
-# indir = "D:/UserData/takuyai/ownCloud/projects/sa-comparison/data"
-indir = "data/"
+from .settings import *  # import project-specific settings
+
 
 # read in previous sample set for a single climate scenario
 # we use this as a template
@@ -33,26 +33,27 @@ problem = {
 }
 
 
-# Create Saltelli samples
+# Create Morris samples (p+1)*N
 # SALib expects purely numeric values so categoricals are transformed as such
-samples = sample(problem, 10, seed=101)
+moat_samples = morris_sampler(problem, 10, seed=101)
 
 # Create template
-rsobol_df = df.iloc[0][constant_cols].to_frame().T
-rsobol_df = pd.concat([rsobol_df]*len(samples), ignore_index=True)
+moat_df = df.iloc[0][constant_cols].to_frame().T
+moat_df = pd.concat([moat_df]*len(moat_samples), ignore_index=True)
 
-df_samples = pd.DataFrame(data=samples, columns=perturbed_cols)
+df_samples = pd.DataFrame(data=moat_samples, columns=perturbed_cols)
+
 
 # Export numeric sample values
-rsobol_df[df_samples.columns] = df_samples
+moat_df[df_samples.columns] = df_samples
 
-numeric_df = rsobol_df.copy()
+numeric_df = moat_df.copy()
 for col in numeric_df:
     if col in cat_cols:
         numeric_df[col] = numeric_df[col].astype('category')
         numeric_df[col] = numeric_df[col].cat.codes
 
-numeric_df.to_csv(indir+'radial_10_numeric_samples.csv')
+numeric_df.to_csv(indir+'moat_10_numeric_samples.csv')
 
 
 # Create dataframe of perturbed values
@@ -65,6 +66,6 @@ for col in df_samples:
 
 
 # Replace template values with perturbed values and export to csv
-rsobol_df[df_samples.columns] = df_samples
-rsobol_df = rsobol_df.rename('{}_radial_10_sample'.format)
-rsobol_df.to_csv(indir+'radial_10_samples.csv')
+moat_df[df_samples.columns] = df_samples
+moat_df = moat_df.rename('{}_moat_sample'.format)
+moat_df.to_csv(indir+'moat_10_samples.csv')

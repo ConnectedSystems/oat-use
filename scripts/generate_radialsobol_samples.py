@@ -1,12 +1,12 @@
 import pandas as pd
-from SALib.sample.saltelli import sample
+from SALib.sample.radial.radial_sobol import sample
 
-indir = "data"
+from .settings import *  # import project-specific settings
 
 
 # read in previous sample set for a single climate scenario
 # we use this as a template
-df = pd.read_csv(indir+'/example_sample.csv', index_col=0)
+df = pd.read_csv(indir+'example_sample.csv', index_col=0)
 
 is_perturbed = (df != df.iloc[0]).any()
 perturbed_cols = df.loc[:, is_perturbed].columns
@@ -35,24 +35,24 @@ problem = {
 
 # Create Saltelli samples
 # SALib expects purely numeric values so categoricals are transformed as such
-samples = sample(problem, 5, seed=101)
+samples = sample(problem, 10, seed=101)
 
 # Create template
-saltelli_df = df.iloc[0][constant_cols].to_frame().T
-saltelli_df = pd.concat([saltelli_df]*len(samples), ignore_index=True)
+rsobol_df = df.iloc[0][constant_cols].to_frame().T
+rsobol_df = pd.concat([rsobol_df]*len(samples), ignore_index=True)
 
 df_samples = pd.DataFrame(data=samples, columns=perturbed_cols)
 
 # Export numeric sample values
-saltelli_df[df_samples.columns] = df_samples
+rsobol_df[df_samples.columns] = df_samples
 
-numeric_df = saltelli_df.copy()
+numeric_df = rsobol_df.copy()
 for col in numeric_df:
     if col in cat_cols:
         numeric_df[col] = numeric_df[col].astype('category')
         numeric_df[col] = numeric_df[col].cat.codes
 
-numeric_df.to_csv(indir+'/saltelli_10_numeric_samples.csv')
+numeric_df.to_csv(indir+'radial_10_numeric_samples.csv')
 
 
 # Create dataframe of perturbed values
@@ -65,6 +65,6 @@ for col in df_samples:
 
 
 # Replace template values with perturbed values and export to csv
-saltelli_df[df_samples.columns] = df_samples
-saltelli_df = saltelli_df.rename('{}_saltelli_10_sample'.format)
-saltelli_df.to_csv(indir+'/saltelli_10_samples.csv')
+rsobol_df[df_samples.columns] = df_samples
+rsobol_df = rsobol_df.rename('{}_radial_10_sample'.format)
+rsobol_df.to_csv(indir+'radial_10_samples.csv')

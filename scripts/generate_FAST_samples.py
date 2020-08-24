@@ -1,12 +1,12 @@
 import pandas as pd
-from SALib.sample.morris import sample as morris_sampler
+from SALib.sample.fast_sampler import sample as fast_sampler
 
-indir = "D:/UserData/takuyai/ownCloud/projects/sa-comparison/data"
+from .settings import *  # import project-specific settings
 
 
 # read in previous sample set for a single climate scenario
 # we use this as a template
-df = pd.read_csv(indir+'/example_sample.csv', index_col=0)
+df = pd.read_csv(indir+'example_sample.csv', index_col=0)
 
 is_perturbed = (df != df.iloc[0]).any()
 perturbed_cols = df.loc[:, is_perturbed].columns
@@ -33,27 +33,27 @@ problem = {
 }
 
 
-# Create Morris samples (p+1)*N
+# Create eFAST samples (p+1)*N
 # SALib expects purely numeric values so categoricals are transformed as such
-moat_samples = morris_sampler(problem, 10, seed=101)
+fast_samples = fast_sampler(problem, 65, seed=101)
 
 # Create template
-moat_df = df.iloc[0][constant_cols].to_frame().T
-moat_df = pd.concat([moat_df]*len(moat_samples), ignore_index=True)
+fast_df = df.iloc[0][constant_cols].to_frame().T
+fast_df = pd.concat([fast_df]*len(fast_samples), ignore_index=True)
 
-df_samples = pd.DataFrame(data=moat_samples, columns=perturbed_cols)
+df_samples = pd.DataFrame(data=fast_samples, columns=perturbed_cols)
 
 
 # Export numeric sample values
-moat_df[df_samples.columns] = df_samples
+fast_df[df_samples.columns] = df_samples
 
-numeric_df = moat_df.copy()
+numeric_df = fast_df.copy()
 for col in numeric_df:
     if col in cat_cols:
         numeric_df[col] = numeric_df[col].astype('category')
         numeric_df[col] = numeric_df[col].cat.codes
 
-numeric_df.to_csv(indir+'/moat_10_numeric_samples.csv')
+numeric_df.to_csv(indir+'fast_10_numeric_samples.csv')
 
 
 # Create dataframe of perturbed values
@@ -66,6 +66,6 @@ for col in df_samples:
 
 
 # Replace template values with perturbed values and export to csv
-moat_df[df_samples.columns] = df_samples
-moat_df = moat_df.rename('{}_moat_sample'.format)
-moat_df.to_csv(indir+'/moat_10_samples.csv')
+fast_df[df_samples.columns] = df_samples
+fast_df = fast_df.rename('{}_fast_sample'.format)
+fast_df.to_csv(indir+'fast_10_samples.csv')

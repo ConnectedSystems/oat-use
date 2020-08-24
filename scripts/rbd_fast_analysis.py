@@ -3,9 +3,10 @@ import pandas as pd
 
 from SALib.analyze.rbd_fast import analyze as rbd_analyze
 
+from .settings import *  # import project-specific settings
 
-data_dir = "D:/UserData/takuyai/ownCloud/projects/sa-comparison/data/"
-fig_dir = "D:/UserData/takuyai/ownCloud/projects/sa-comparison/figures/"
+
+data_dir = indir
 
 
 ### Define problem spec

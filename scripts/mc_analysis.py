@@ -10,10 +10,10 @@ from SALib.plotting.bar import plot as barplot
 
 # python launch.py --specific_inputs moat_10_samples.csv --num_cores 46
 
+from .settings import *
 
 
-data_dir = "D:/UserData/takuyai/ownCloud/projects/sa-comparison/data/"
-fig_dir = "D:/UserData/takuyai/ownCloud/projects/sa-comparison/figures/"
+data_dir = indir
 
 problem = {
     'num_vars': 53,
