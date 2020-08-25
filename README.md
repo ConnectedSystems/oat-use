@@ -1,37 +1,41 @@
 Setup
 =======
 
-First create the project directory
-
-```bash
-$ mkdir sa-comparison
-$ cd sa-comparison
-```
-
-Then clone the project:
+Clone the necessary repositories:
 
 ```bash
 $ git clone https://github.com/ConnectedSystems/sa-comparison.git
+$ git clone https://github.com/ConnectedSystems/SALib.git --branch radial-oat-method --single-branch salib-roat
 ```
 
-Assuming you are still in the project folder after cloning:
+Set up environment from the project folder:
 
 ```bash
-$ conda create -n sa-comparison python=3.6.6
-$ conda activate sa-comparison
+$ cd oat-use
+$ conda create -n oat-use python=3.6.6 -y
+$ conda activate oat-use
 $ pip install -r requirements.txt
+$ cd ..
+```
+
+Install the specific branch of SALib used for the study:
+
+```bash
+$ cd salib-roat
+$ pip install -e .
+$ cd ..
 ```
 
 Set up ipykernel with:
 
 ```bash
-$ python -m ipykernel install --name sa-comparison --display-name "Python (sa-comparison)"
+$ python -m ipykernel install --name oat-use --display-name "Python (oat-use)"
 ```
 
 Notebooks
 =========
 
-Notebooks are found in the `notebooks` directory.
+Notebooks are found in the `notebooks` directory and are labelled order.
 
 Once the `conda` environment is activated:
 
