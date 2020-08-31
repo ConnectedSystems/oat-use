@@ -51,7 +51,7 @@ problem = {
     'bounds': bounds
 }
 
-# Create MC samples (p+1)*N
+# Create MC samples (p+1)*n
 # SALib expects purely numeric values so categoricals are transformed as such
 oat_samples = mc_sampler(problem, 10, seed=101)
 

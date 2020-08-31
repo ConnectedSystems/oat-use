@@ -33,7 +33,7 @@ problem = {
 }
 
 
-# Create eFAST samples (p+1)*N
+# Create eFAST samples (p+1)*n
 # SALib expects purely numeric values so categoricals are transformed as such
 fast_samples = fast_sampler(problem, 65, seed=101)
 

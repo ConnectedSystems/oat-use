@@ -33,7 +33,7 @@ problem = {
 }
 
 
-# Create Morris samples (p+1)*N
+# Create Morris samples (p+1)*n
 # SALib expects purely numeric values so categoricals are transformed as such
 moat_samples = morris_sampler(problem, 10, seed=101)
 
