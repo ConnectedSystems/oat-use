@@ -14,7 +14,6 @@ except ImportError:
 
 import numpy as np
 import pandas as pd
-import dask.dataframe as dd
 
 
 mm_to_ML = 100.0
