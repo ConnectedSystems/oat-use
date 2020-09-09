@@ -19,6 +19,7 @@ import pandas as pd
 mm_to_ML = 100.0
 zone_tag = re.compile('Zone_([0-9]+)')
 
+
 def get_gz(tar):
     """Get list of files in tarfile ending with 'gz'"""
     batch_results = [tar.extractfile(f) for f in tar.getmembers()
@@ -260,12 +261,12 @@ def extract_farm_data(batch, set_name, batch_dict, timeseries):
     
     # Calculate indices for all identified files
     end_exclusive_step = 31
-    for res in batch:
+    for fn, res in batch:
         try:
-            zone_id = zone_tag.search(res.name).group()
+            zone_id = zone_tag.search(fn).group()
         except AttributeError:
             # Zone IDs not available, default to filename
-            r_name = os.path.basename(res.name)
+            r_name = os.path.basename(fn)
             zone_id = os.path.splitext(r_name)[0]
             # print("Zone ID not available", zone_id)
             # print("given res:", res)
@@ -427,8 +428,8 @@ def extract_ecology_data(batch, set_name, batch_dict, timeseries):
     # Need to make these comparable for analysis.
     end_exclusive_step = 31
 
-    for res in batch:
-        r_name = res.name.split('/')[-1].replace('.csv', '')
+    for fn, res in batch:
+        r_name = fn.split('/')[-1].replace('.csv', '')
         if 'gw_ecology' in r_name:
             # Skip this file as we don't need it - info contained in other indices
             continue
@@ -589,7 +590,7 @@ def calc_trigger_indicator(scenario, set_name, batch_dict, timeseries):
     # Need to make these comparable for analysis.
     start_step = int(365*3)+1
     end_exclusive_step = 10951
-    for res in scenario:
+    for fn, res in scenario:
 
         # Get level data at trigger bores
         # Data should be in mAHD
@@ -665,7 +666,7 @@ def get_policy_sw_alloc_indicator(scenario, set_name, batch_dict, timeseries):
     batch_dict['SW Allocation Index'] = batch_dict.get(
         'SW Allocation Index', {})
 
-    for res in scenario:
+    for fn, res in scenario:
         # Get level data at trigger bores
         # Data should be in mAHD
         pgw = read_result_csv(res, warmup_period=start_step,
@@ -684,7 +685,7 @@ def get_dam_levels(scenario, set_name, batch_dict, timeseries=False):
     batch_dict['Dam Level'] = batch_dict.get(
         'Dam Level', {})
 
-    for res in scenario:
+    for fn, res in scenario:
         mean_dl = read_result_csv(res, warmup_period=start_step, 
                                   end_step=end_exclusive_step, 
                                   parse_dates=True)
@@ -729,7 +730,7 @@ def filter_filelist(fp, conds):
     ==========
     * subset of file list
     """
-    file_list = [fp.extractfile(f) for f in fp
+    file_list = [(f.name, fp.extractfile(f)) for f in fp
                  if f.isfile() and filter_condition(f.name, conds[0], conds[1])]
     return file_list
 # End filter_filelist
