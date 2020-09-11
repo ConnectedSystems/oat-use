@@ -59,7 +59,7 @@ Notebooks
 
 Notebooks are found in the `notebooks` directory and are labelled in order of use.
 
-Miscellaneous notebooks are unnumbered and are included for prosperity.
+Miscellaneous notebooks are unnumbered and are included for posterity.
 
 Once the `conda` environment is activated:
 
