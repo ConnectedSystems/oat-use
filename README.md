@@ -11,6 +11,9 @@ Clone the necessary repositories:
 ```bash
 $ git clone https://github.com/ConnectedSystems/oat-use.git
 $ git clone https://github.com/ConnectedSystems/SALib.git --branch radial-oat-method --single-branch salib-roat
+$ cd salib-roat
+$ git checkout da99fdaed05c29e98ab8d7685d2c6ad3783ce946
+$ cd ..
 ```
 
 Set up environment from the project folder:
@@ -41,7 +44,10 @@ The full instructions as above:
 
 ```bash
 $ git clone https://github.com/ConnectedSystems/oat-use.git
-$ git clone https://github.com/ConnectedSystems/SALib.git --branch radial-oat-method --single-branch salib-roat
+$ git clone https://github.com/ConnectedSystems/SALib.git --branch radial-oat-method --single-branch salib-roat 
+$ cd salib-roat
+$ git checkout da99fdaed05c29e98ab8d7685d2c6ad3783ce946
+$ cd ..
 
 $ conda create -n oat-use python=3.6.6 -y
 $ conda activate oat-use
@@ -61,11 +67,17 @@ Notebooks are found in the `notebooks` directory and are labelled in order of us
 
 Miscellaneous notebooks are unnumbered and are included for posterity.
 
+To view notebooks locally, it is assumed jupyter `notebook` or `lab` is installed.
+
+```bash
+pip install jupyterlab
+```
+
 Once the `conda` environment is activated:
 
 ```bash
 $ cd notebooks
-$ jupyter notebook
+$ jupyter lab
 ```
 
 Scripts
